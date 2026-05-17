@@ -1,0 +1,542 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #F5F5F5;
+  color: #1a1a1a;
+  line-height: 1.5;
+}
+
+:root {
+  --green: #00C853;
+  --green-dark: #00A846;
+  --green-light: #E8F5E9;
+  --blue: #1565C0;
+  --orange: #E65100;
+  --text: #1a1a1a;
+  --text-muted: #757575;
+  --border: #E0E0E0;
+  --bg: #F5F5F5;
+}
+
+a { text-decoration: none; }
+
+button { font-family: inherit; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F5F5F5; }
+::-webkit-scrollbar-thumb { background: #00C853; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00A846; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   CMT BOOKING — GLOBAL ANIMATION SYSTEM
+   Philosophy: Train-inspired motion. Everything slides, glides, or rolls in
+   like a train arriving at a platform. Smooth, purposeful, never gimmicky.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Keyframes ──────────────────────────────────────────────────────────── */
+
+/* Page slide-in from right (like boarding a train) */
+@keyframes cmt-slide-in {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Fade up — cards, panels rising into view */
+@keyframes cmt-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade in — simple opacity */
+@keyframes cmt-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Scale pop — seats, buttons responding to interaction */
+@keyframes cmt-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.18); }
+  70%  { transform: scale(0.93); }
+  100% { transform: scale(1); }
+}
+
+/* Seat select pulse — green ripple when seat is clicked */
+@keyframes cmt-seat-select {
+  0%   { box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(0, 200, 83, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 200, 83, 0); }
+}
+
+/* Train track shimmer — loading/skeleton effect */
+@keyframes cmt-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+/* Slide down — dropdowns, toasts */
+@keyframes cmt-slide-down {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Bounce in — coach tabs, badge counters */
+@keyframes cmt-bounce-in {
+  0%   { opacity: 0; transform: scale(0.6); }
+  60%  { opacity: 1; transform: scale(1.08); }
+  80%  { transform: scale(0.96); }
+  100% { transform: scale(1); }
+}
+
+/* Shake — error state */
+@keyframes cmt-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+/* Train move — engine SVG subtle sway */
+@keyframes cmt-train-sway {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%       { transform: translateY(-2px) rotate(0.4deg); }
+  75%       { transform: translateY(1px) rotate(-0.3deg); }
+}
+
+/* Wheel spin — continuous rotation for train wheels */
+@keyframes cmt-wheel-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Chain pulse — coupling between coaches */
+@keyframes cmt-chain-pulse {
+  0%, 100% { opacity: 0.7; }
+  50%       { opacity: 1; }
+}
+
+/* Green underline grow — tab active indicator */
+@keyframes cmt-underline-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Toast slide in from top */
+@keyframes cmt-toast-in {
+  from { opacity: 0; transform: translateY(-100%) translateX(-50%); }
+  to   { opacity: 1; transform: translateY(0) translateX(-50%); }
+}
+
+/* Counter tick up — fare numbers */
+@keyframes cmt-tick {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Page entry animations ──────────────────────────────────────────────── */
+
+/* Every page root gets this */
+.seat-page,
+.search-page,
+.home-page,
+.passenger-page,
+.confirmation-page,
+.bookings-page,
+.pnr-page,
+.live-page,
+.help-page,
+.auth-page,
+.settings-page {
+  animation: cmt-fade-in 0.3s ease-out;
+}
+
+/* Page body content slides up */
+.seat-page-body,
+.search-results-body,
+.passenger-body,
+.bookings-body,
+.settings-layout {
+  animation: cmt-fade-up 0.4s ease-out 0.05s both;
+}
+
+/* ── Staggered card animations ──────────────────────────────────────────── */
+
+/* Train cards in search results */
+.train-card {
+  animation: cmt-fade-up 0.35s ease-out both;
+}
+.train-card:nth-child(1) { animation-delay: 0.05s; }
+.train-card:nth-child(2) { animation-delay: 0.10s; }
+.train-card:nth-child(3) { animation-delay: 0.15s; }
+.train-card:nth-child(4) { animation-delay: 0.20s; }
+.train-card:nth-child(5) { animation-delay: 0.25s; }
+.train-card:nth-child(6) { animation-delay: 0.30s; }
+.train-card:nth-child(n+7) { animation-delay: 0.35s; }
+
+/* Booking summary aside */
+.booking-summary {
+  animation: cmt-slide-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+/* ── Class & coach tab animations ───────────────────────────────────────── */
+
+.class-tab {
+  animation: cmt-fade-up 0.3s ease-out both;
+  transition: transform 0.15s ease, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.class-tab:nth-child(1) { animation-delay: 0.06s; }
+.class-tab:nth-child(2) { animation-delay: 0.10s; }
+.class-tab:nth-child(3) { animation-delay: 0.14s; }
+.class-tab:nth-child(4) { animation-delay: 0.18s; }
+.class-tab:nth-child(5) { animation-delay: 0.22s; }
+.class-tab:nth-child(6) { animation-delay: 0.26s; }
+
+.class-tab:hover  { transform: translateY(-2px); }
+.class-tab:active { transform: translateY(0) scale(0.97); }
+
+.coach-tab {
+  animation: cmt-bounce-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transition: transform 0.15s ease, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.coach-tab:nth-child(1) { animation-delay: 0.08s; }
+.coach-tab:nth-child(2) { animation-delay: 0.13s; }
+.coach-tab:nth-child(3) { animation-delay: 0.18s; }
+.coach-tab:nth-child(4) { animation-delay: 0.23s; }
+.coach-tab:nth-child(5) { animation-delay: 0.28s; }
+
+.coach-tab:hover  { transform: translateY(-2px) scale(1.03); }
+.coach-tab:active { transform: scale(0.96); }
+
+/* ── Seat tile animations ───────────────────────────────────────────────── */
+
+.sm-seat {
+  transition:
+    background  0.15s ease,
+    border-color 0.15s ease,
+    transform   0.12s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow  0.15s ease;
+}
+
+.sm-seat:not(:disabled):hover {
+  transform: scale(1.1);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 200, 83, 0.25);
+}
+
+.sm-seat:not(:disabled):active {
+  transform: scale(0.93);
+}
+
+/* When a seat becomes selected — pulse animation */
+.sm-selected {
+  animation: cmt-seat-select 0.5s ease-out;
+}
+
+/* ── Coach block animations ─────────────────────────────────────────────── */
+
+.coach-block {
+  animation: cmt-fade-up 0.4s ease-out both;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+.coach-block:nth-child(1) { animation-delay: 0.08s; }
+.coach-block:nth-child(2) { animation-delay: 0.16s; }
+.coach-block:nth-child(3) { animation-delay: 0.24s; }
+.coach-block:nth-child(4) { animation-delay: 0.32s; }
+
+/* Chain knuckle pulses subtly */
+.coach-chain-knuckle {
+  animation: cmt-chain-pulse 2.5s ease-in-out infinite;
+}
+
+/* Engine SVG sways gently */
+.train-engine-svg {
+  animation: cmt-train-sway 3s ease-in-out infinite;
+}
+.train-guard-svg {
+  animation: cmt-train-sway 3s ease-in-out infinite reverse;
+}
+
+/* ── Navbar animations ──────────────────────────────────────────────────── */
+
+.navbar {
+  animation: cmt-fade-in 0.25s ease-out;
+}
+
+/* Nav links slide in */
+.nav-links a,
+.nav-links button {
+  transition: color 0.2s, background 0.2s;
+  position: relative;
+}
+
+/* ── Toast notification ─────────────────────────────────────────────────── */
+
+.toast-notification {
+  animation: cmt-toast-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Selected seat items in summary ─────────────────────────────────────── */
+
+.selected-seat-item {
+  animation: cmt-slide-down 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+
+.proceed-btn {
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s;
+}
+.proceed-btn:not(.proceed-disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 200, 83, 0.35);
+}
+.proceed-btn:not(.proceed-disabled):active {
+  transform: translateY(0) scale(0.98);
+}
+
+.back-btn {
+  transition: background 0.2s, transform 0.15s;
+}
+.back-btn:hover  { transform: translateX(-2px); }
+.back-btn:active { transform: translateX(0) scale(0.97); }
+
+/* ── Booking summary fare numbers ───────────────────────────────────────── */
+
+.fare-total span:last-child,
+.sel-fare {
+  animation: cmt-tick 0.2s ease-out;
+}
+
+/* ── Coach dim overlay smooth transition ─────────────────────────────────── */
+
+.coach-dim-overlay {
+  transition: opacity 0.3s ease;
+}
+
+/* ── Scroll containers — smooth momentum ─────────────────────────────────── */
+
+.multi-coach-scroll,
+.sm-scroll {
+  scroll-behavior: smooth;
+}
+
+/* ── Focus ring — accessibility ─────────────────────────────────────────── */
+
+.sm-seat:focus-visible,
+.coach-tab:focus-visible,
+.class-tab:focus-visible,
+.proceed-btn:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* ── Reduced motion respect ──────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Additional page root class aliases */
+.home,
+.search-results,
+.confirm-page,
+.aadhaar-page,
+.pnr-page,
+.live-page,
+.help-page,
+.auth-page {
+  animation: cmt-fade-in 0.3s ease-out;
+}
+
+/* TrainCard hover lift */
+.train-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.train-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+}
+
+/* Remove-seat button */
+.remove-seat {
+  transition: background 0.15s, transform 0.15s;
+}
+.remove-seat:hover  { transform: scale(1.2) rotate(90deg); }
+.remove-seat:active { transform: scale(0.9); }
+
+/* Coach block label header */
+.coach-block-label {
+  transition: background 0.2s;
+}
+.coach-block-active .coach-block-label {
+  background: #2E7D32;
+}
+
+/* Smooth coach tab active state */
+.coach-tab-active {
+  animation: cmt-bounce-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   GLOBAL DARK MODE — applies to ALL pages when .dark-mode is on html
+   ══════════════════════════════════════════════════════════════════ */
+html.dark-mode {
+  color-scheme: dark;
+}
+html.dark-mode body {
+  background: #0f1117 !important;
+  color: #e8e8e8 !important;
+}
+
+/* Navbar */
+html.dark-mode .navbar,
+html.dark-mode .nav-bar {
+  background: #1a1d27 !important;
+  border-bottom: 1px solid #2a2d3a !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4) !important;
+}
+html.dark-mode .nav-logo,
+html.dark-mode .navbar-logo,
+html.dark-mode .nav-brand { color: #fff !important; }
+html.dark-mode .nav-link,
+html.dark-mode .navbar a { color: #b0b8c8 !important; }
+html.dark-mode .nav-link:hover { color: #fff !important; }
+
+/* Cards, sections, panels */
+html.dark-mode .section-card,
+html.dark-mode .card,
+html.dark-mode .help-section,
+html.dark-mode .faq-item,
+html.dark-mode .train-card,
+html.dark-mode .booking-card,
+html.dark-mode .result-card,
+html.dark-mode .summary-card,
+html.dark-mode .passenger-form,
+html.dark-mode .booking-sidebar,
+html.dark-mode .help-hero,
+html.dark-mode .hsc-item,
+html.dark-mode .help-cat-pills,
+html.dark-mode .help-faq-area,
+html.dark-mode .help-search-results,
+html.dark-mode .auth-card,
+html.dark-mode .pnr-card,
+html.dark-mode .live-card {
+  background: #1e2130 !important;
+  border-color: #2a2d3a !important;
+  color: #e8e8e8 !important;
+}
+
+/* Inputs, selects, textareas */
+html.dark-mode input,
+html.dark-mode select,
+html.dark-mode textarea,
+html.dark-mode .form-input,
+html.dark-mode .form-select {
+  background: #252836 !important;
+  border-color: #3a3d4a !important;
+  color: #e8e8e8 !important;
+}
+html.dark-mode input::placeholder,
+html.dark-mode textarea::placeholder { color: #666 !important; }
+html.dark-mode input:focus,
+html.dark-mode select:focus,
+html.dark-mode .form-input:focus { border-color: #00A846 !important; }
+
+/* Labels, headings, text */
+html.dark-mode h1, html.dark-mode h2, html.dark-mode h3,
+html.dark-mode h4, html.dark-mode h5, html.dark-mode h6,
+html.dark-mode .section-title, html.dark-mode .form-label,
+html.dark-mode .hdr-train, html.dark-mode .hdr-route,
+html.dark-mode .pax-num, html.dark-mode .summary-title,
+html.dark-mode .fare-total-line, html.dark-mode .addon-title {
+  color: #f0f0f0 !important;
+}
+html.dark-mode p, html.dark-mode span,
+html.dark-mode .hint-text, html.dark-mode .addon-desc,
+html.dark-mode .sr-desc, html.dark-mode .fare-line,
+html.dark-mode .hsc-desc, html.dark-mode .faq-a {
+  color: #a0a8b8 !important;
+}
+
+/* Page backgrounds */
+html.dark-mode .passenger-page,
+html.dark-mode .help-page,
+html.dark-mode .auth-page,
+html.dark-mode .pnr-page,
+html.dark-mode .live-page,
+html.dark-mode .search-page,
+html.dark-mode .bookings-page,
+html.dark-mode .seat-page,
+html.dark-mode .landing-page,
+html.dark-mode .home-page,
+html.dark-mode .confirmation-page {
+  background: #0f1117 !important;
+}
+
+/* Sidebar / header strips */
+html.dark-mode .passenger-header,
+html.dark-mode .booking-header,
+html.dark-mode .page-header {
+  background: #1a1d27 !important;
+  border-bottom: 1px solid #2a2d3a !important;
+}
+
+/* Buttons — keep brand green, soften others */
+html.dark-mode .back-btn,
+html.dark-mode .edit-pax-btn,
+html.dark-mode .aam-close,
+html.dark-mode .smodal-cancel,
+html.dark-mode .cat-pill {
+  background: #252836 !important;
+  border-color: #3a3d4a !important;
+  color: #c0c8d8 !important;
+}
+html.dark-mode .cat-pill:hover,
+html.dark-mode .back-btn:hover { background: #2e3147 !important; }
+html.dark-mode .pill-active {
+  background: #00A846 !important;
+  color: #fff !important;
+}
+
+/* Modals */
+html.dark-mode .aadhaar-modal,
+html.dark-mode .settings-modal,
+html.dark-mode .smodal {
+  background: #1e2130 !important;
+  border-color: #2a2d3a !important;
+}
+html.dark-mode .aadhaar-modal-overlay,
+html.dark-mode .settings-modal-overlay { background: rgba(0,0,0,0.7) !important; }
+
+/* FAQ / accordions */
+html.dark-mode .faq-q {
+  background: #252836 !important;
+  color: #e0e0e0 !important;
+  border-bottom-color: #2a2d3a !important;
+}
+html.dark-mode .faq-item { border-color: #2a2d3a !important; }
+html.dark-mode .faq-item.faq-open .faq-q { background: #1e2130 !important; }
+
+/* Search box */
+html.dark-mode .hs-search-wrap,
+html.dark-mode .search-box { background: #252836 !important; border-color: #3a3d4a !important; }
+html.dark-mode .hs-search { background: transparent !important; color: #e8e8e8 !important; }
+
+/* Dividers */
+html.dark-mode hr, html.dark-mode .divider { border-color: #2a2d3a !important; }
+
+/* Scrollbar */
+html.dark-mode ::-webkit-scrollbar { background: #1a1d27; }
+html.dark-mode ::-webkit-scrollbar-thumb { background: #3a3d4a; border-radius: 4px; }

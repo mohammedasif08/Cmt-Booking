@@ -1,0 +1,746 @@
+.seat-page {
+  min-height: 100vh;
+  background: #F5F5F5;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.toast-notification {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #E65100;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 999;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  animation: toastIn 0.3s ease-out;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.not-found {
+  text-align: center;
+  padding: 80px;
+}
+
+.seat-page-header {
+  background: linear-gradient(135deg, #00C853, #00A846);
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.back-btn:hover { background: rgba(255,255,255,0.3); }
+
+.header-train-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.header-train-num {
+  background: rgba(255,255,255,0.25);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.header-train-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: white;
+}
+
+.header-type-badge {
+  font-size: 11px;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.header-route {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.9);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.header-dur { color: rgba(255,255,255,0.7); font-size: 12px; }
+
+.seat-page-body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.seat-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* CLASS TABS */
+.class-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.class-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 18px;
+  border: 2px solid #E0E0E0;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  min-width: 80px;
+}
+
+.class-tab:hover {
+  border-color: #00C853;
+  background: #E8F5E9;
+}
+
+.class-tab-active {
+  border-color: #00C853;
+  background: #E8F5E9;
+  box-shadow: 0 0 0 3px rgba(0,200,83,0.2);
+}
+
+.tab-cls {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+.tab-fare {
+  font-size: 14px;
+  font-weight: 700;
+  color: #00C853;
+}
+
+.tab-avail {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.av-green { background: #E8F5E9; color: #2E7D32; }
+.av-orange { background: #FFF3E0; color: #E65100; }
+.av-red { background: #FFEBEE; color: #C62828; }
+
+/* ── COACH SELECTOR ─────────────────────────────────────────────────────── */
+.coach-selector-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.coach-selector-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #757575;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.coach-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.coach-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 14px;
+  border: 1.5px solid #E0E0E0;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+  min-width: 64px;
+  gap: 2px;
+}
+
+.coach-tab:hover {
+  border-color: #00C853;
+  background: #F1FFF6;
+}
+
+.coach-tab-active {
+  border-color: #00C853;
+  background: #E8F5E9;
+  box-shadow: 0 0 0 3px rgba(0,200,83,0.18);
+}
+
+.coach-tab-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: 0.3px;
+}
+
+.coach-tab-active .coach-tab-name {
+  color: #00A846;
+}
+
+.coach-tab-avail {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* COACH INFO */
+.coach-info-bar {
+  background: white;
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.coach-info-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.coach-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.avail-count {
+  font-size: 12px;
+  color: #00C853;
+  font-weight: 600;
+}
+
+.fare-display {
+  font-size: 20px;
+  font-weight: 800;
+  color: #00C853;
+}
+
+/* LEGEND */
+.seat-legend {
+  background: white;
+  border-radius: 12px;
+  padding: 12px 18px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #424242;
+  font-weight: 500;
+}
+
+.legend-box {
+  width: 28px;
+  height: 24px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+}
+
+.legend-available {
+  background: white;
+  border-color: #B0BEC5;
+}
+
+.legend-male {
+  background: #4CAF50;
+  border-color: #388E3C;
+}
+
+.legend-female {
+  background: #FF69B4;
+  border-color: #C2185B;
+}
+
+.legend-selected {
+  background: #1565C0;
+  border-color: #0D47A1;
+}
+
+/* RIGHT PANEL */
+.booking-summary {
+  width: 300px;
+  flex-shrink: 0;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 90px;
+}
+
+.summary-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #E8F5E9;
+}
+
+.summary-train {
+  margin-bottom: 14px;
+}
+
+.sum-train-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.sum-train-num {
+  font-size: 12px;
+  color: #9E9E9E;
+}
+
+.summary-route {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  background: #F5F5F5;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.sum-station { flex: 1; }
+.sum-right { text-align: right; }
+
+.sum-time {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+.sum-code {
+  font-size: 13px;
+  font-weight: 700;
+  color: #00C853;
+}
+
+.sum-city {
+  font-size: 10px;
+  color: #9E9E9E;
+}
+
+.sum-arrow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #9E9E9E;
+  font-size: 12px;
+}
+
+.sum-line {
+  width: 20px;
+  height: 1px;
+  background: #E0E0E0;
+}
+
+.summary-class-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.sum-label {
+  font-size: 13px;
+  color: #757575;
+}
+
+.sum-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.summary-divider {
+  height: 1px;
+  background: #F0F0F0;
+  margin: 14px 0;
+}
+
+.selected-heading {
+  font-size: 13px;
+  font-weight: 700;
+  color: #37474F;
+  margin: 0 0 10px;
+}
+
+.no-seats-msg {
+  font-size: 13px;
+  color: #9E9E9E;
+  text-align: center;
+  padding: 12px;
+  background: #FAFAFA;
+  border-radius: 8px;
+  border: 2px dashed #E0E0E0;
+}
+
+.selected-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.selected-seat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #E8F5E9;
+  border-radius: 8px;
+  padding: 8px 10px;
+  border: 1px solid #A5D6A7;
+}
+
+.sel-seat-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sel-seat-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.sel-berth {
+  font-size: 11px;
+  color: #757575;
+}
+
+.sel-fare {
+  font-size: 14px;
+  font-weight: 700;
+  color: #00C853;
+}
+
+.remove-seat {
+  background: none;
+  border: none;
+  color: #9E9E9E;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: all 0.1s;
+}
+
+.remove-seat:hover {
+  background: #FFEBEE;
+  color: #C62828;
+}
+
+.fare-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fare-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #424242;
+}
+
+.fare-service { color: #9E9E9E; font-size: 12px; }
+
+.fare-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 800;
+  color: #1a1a1a;
+  padding-top: 8px;
+  border-top: 2px solid #E8F5E9;
+}
+
+.proceed-btn {
+  width: 100%;
+  padding: 14px;
+  background: #00C853;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 16px;
+  font-family: inherit;
+}
+
+.proceed-btn:hover:not(.proceed-disabled) {
+  background: #00A846;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,200,83,0.4);
+}
+
+.proceed-disabled {
+  background: #E0E0E0;
+  color: #9E9E9E;
+  cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+  .seat-page-body {
+    flex-direction: column;
+  }
+  .booking-summary {
+    width: 100%;
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .seat-page-header { padding: 12px 16px; gap: 10px; }
+  .header-train-name { font-size: 14px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MULTI-COACH HORIZONTAL TRAIN VIEW
+   Layout: [ENGINE] ──[S1]─⛓─[S2]─⛓─[S3]─⛓─[S4]── [GUARD]
+   The entire row scrolls horizontally. Inactive coaches are dimmed.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Outer scroll container */
+.multi-coach-scroll {
+  overflow-x: auto;
+  overflow-y: visible;
+  padding-bottom: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #00C853 #f0f0f0;
+}
+.multi-coach-scroll::-webkit-scrollbar       { height: 5px; }
+.multi-coach-scroll::-webkit-scrollbar-track { background: #f0f0f0; }
+.multi-coach-scroll::-webkit-scrollbar-thumb { background: #00C853; border-radius: 3px; }
+
+/* Inner flex row — all coaches in a line */
+.multi-coach-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+  min-width: max-content;
+  padding: 4px 16px 8px;
+}
+
+/* ── ENGINE cap ─────────────────────────────────────────────────────────── */
+.train-engine-cap,
+.train-guard-cap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.train-engine-svg,
+.train-guard-svg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.train-cap-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #546E7A;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ── Individual coach block ─────────────────────────────────────────────── */
+.coach-block {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: relative;
+  transition: filter 0.2s, opacity 0.2s;
+}
+
+.coach-block-active  { filter: none; opacity: 1; }
+.coach-block-dimmed  { filter: grayscale(0.4); opacity: 0.55; }
+
+/* Coach header bar */
+.coach-block-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: #37474F;
+  border-radius: 8px 8px 0 0;
+}
+
+.coach-block-name {
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.coach-block-avail {
+  font-size: 10px;
+  font-weight: 600;
+  color: #A5D6A7;
+  background: rgba(255,255,255,0.12);
+  padding: 1px 6px;
+  border-radius: 20px;
+}
+
+/* Seat map inside the coach */
+.coach-map-wrap {
+  border: 1.5px solid #CFD8DC;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  flex: 1;
+  position: relative;
+}
+
+.coach-map-disabled {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Frosted overlay on inactive coaches */
+.coach-dim-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 247, 250, 0.78);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 0 0 8px 8px;
+  pointer-events: none;
+}
+
+.coach-dim-label {
+  font-size: 28px;
+  font-weight: 900;
+  color: rgba(55,71,79,0.15);
+  letter-spacing: 5px;
+  user-select: none;
+  writing-mode: horizontal-tb;
+}
+
+/* ── Chain coupling between coaches ─────────────────────────────────────── */
+.coach-chain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 3;
+  /* vertically centre in the coach block — align to middle of the coach body */
+  padding-top: 29px; /* header bar height */
+}
+
+/* The vertical coupling line running full height of chain */
+.coach-chain-line {
+  position: absolute;
+  top: 29px;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(
+    to bottom,
+    #78909C 0px,
+    #78909C 6px,
+    #B0BEC5 6px,
+    #B0BEC5 10px
+  );
+  border-radius: 2px;
+}
+
+/* Coupler knuckle — the interlocking hook shape */
+.coach-chain-knuckle {
+  width: 22px;
+  height: 22px;
+  background: #546E7A;
+  border: 2.5px solid #37474F;
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 0 3px #B0BEC5, 0 2px 6px rgba(0,0,0,0.25);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.coach-chain-knuckle::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: #78909C;
+}

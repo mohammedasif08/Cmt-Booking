@@ -1,0 +1,331 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   CMT BOOKING — SEAT MAP
+   Horizontal scroll, white theme, pixel-perfect label alignment
+   ════════════════════════════════════════════════════════════════════════════
+
+   KEY MEASUREMENTS (must stay in sync between labels and seat columns):
+   --sh  : seat height        = 52px
+   --sg  : seat gap (flex)    = 5px   ← gap between seats WITHIN a group
+   --gdiv: group divider h    = 13px  ← dashed line + 2px top/bottom border
+   --sdiv: side divider h     = 20px  ← solid line  + 2px top/bottom border
+   --adiv: aisle divider h    = 26px  ← CC aisle gap
+
+   Label cell for ONE row of seats = --sh (52px)
+   Label gap between zones = same height as the matching divider in seat cols
+   ════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --sh:   52px;   /* seat height */
+  --sw:   64px;   /* seat width  */
+  --sg:    5px;   /* gap between seats within group */
+  --gdiv: 13px;   /* group divider height (dashed) */
+  --sdiv: 20px;   /* side divider height  (solid)  */
+  --adiv: 26px;   /* CC aisle divider height        */
+  --lw:   76px;   /* left label column width        */
+  --eng:  30px;   /* engine/door bar height         */
+  --gpad: 12px;   /* grid padding top/bottom        */
+  --col-gap: 10px;/* gap between bay columns        */
+}
+
+/* ── Outer container ─────────────────────────────────────────────────────── */
+.sm-wrap {
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  min-height: 100px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   LEFT LABEL COLUMN  (fixed, does not scroll)
+   ════════════════════════════════════════════════════════════════════════════ */
+.sm-labels {
+  width: var(--lw);
+  flex-shrink: 0;
+  background: #F8F9FA;
+  border-right: 1.5px solid #E0E0E0;
+  border-left: none;
+  display: flex;
+  flex-direction: column;
+  padding-top: calc(var(--eng) + var(--gpad));
+  padding-bottom: calc(var(--eng) + var(--gpad));
+}
+
+/* Flipped coach: labels move to the RIGHT side */
+.sm-labels-right {
+  border-right: none;
+  border-left: 1.5px solid #E0E0E0;
+  order: 2;
+}
+
+/* One zone label = exactly one seat row tall */
+/* Consecutive labels within the same berth tier get the same gap as seats within a sm-group */
+.sm-lc + .sm-lc { margin-top: var(--sg); }
+
+.sm-lc {
+  height: var(--sh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1.25;
+  padding: 0 3px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+/* Zone colours */
+.sm-lc-upper  { color: #3949AB; background: rgba(57,73,171,0.06); }
+.sm-lc-middle { color: #6D4C41; background: rgba(109,76,65,0.06); }
+.sm-lc-lower  { color: #2E7D32; background: rgba(46,125,50,0.06); }
+.sm-lc-side   { color: #BF360C; background: rgba(191,54,12,0.06); }
+.sm-lc-window { color: #1565C0; background: rgba(21,101,192,0.06); }
+.sm-lc-aisle  { color: #6A1B9A; background: rgba(106,27,154,0.06); }
+
+/* Gap spacers — heights MUST match the dividers in the seat columns */
+.sm-gap { flex-shrink: 0; }
+
+.sm-gdiv-gap {
+  /* matches sm-gdiv: 1px border + 4px padding-top + (8px-2px content) + 4px padding-bottom + 1px border = 13px total */
+  height: var(--gdiv);
+  background: repeating-linear-gradient(
+    90deg, #DADADA 0, #DADADA 3px, transparent 3px, transparent 7px
+  );
+  border-top: 1px solid #E4E4E4;
+  border-bottom: 1px solid #E4E4E4;
+}
+
+.sm-sdiv-gap {
+  /* matches sm-sdiv: 2px border + 6px padding-top + (4px content) + 6px padding-bottom + 2px border = 20px */
+  height: var(--sdiv);
+  background: #EFEFEF;
+  border-top: 2px solid #D0D0D0;
+  border-bottom: 2px solid #D0D0D0;
+}
+
+.sm-adiv-gap {
+  /* matches sm-adiv: aisle gap in chair car */
+  height: var(--adiv);
+  background: repeating-linear-gradient(
+    90deg, #DADADA 0, #DADADA 3px, transparent 3px, transparent 7px
+  );
+  border-top: 1px solid #E4E4E4;
+  border-bottom: 1px solid #E4E4E4;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   SCROLL AREA  (right side, horizontal overflow)
+   ════════════════════════════════════════════════════════════════════════════ */
+.sm-scroll {
+  flex: 1;
+  min-width: 0;
+  order: 1;   /* always between labels (order:0) and optional right-labels (order:2) */
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #00C853 #F0F0F0;
+}
+.sm-scroll::-webkit-scrollbar       { height: 5px; }
+.sm-scroll::-webkit-scrollbar-track { background: #F0F0F0; }
+.sm-scroll::-webkit-scrollbar-thumb { background: #00C853; border-radius: 3px; }
+
+/* Engine / Door bars */
+.sm-engine-bar,
+.sm-door-bar {
+  height: var(--eng);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: #fff;
+  flex-shrink: 0;
+}
+.sm-engine-bar { background: #37474F; }
+.sm-door-bar   { background: #546E7A; }
+
+/* Bay grid */
+.sm-grid {
+  display: flex;
+  flex-direction: row;
+  gap: var(--col-gap);
+  padding: var(--gpad) 16px;
+  min-width: max-content;
+  align-items: flex-start;
+  flex: 1;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   BAY COLUMN  (one per bay for berth, one per row for CC/EC)
+   ════════════════════════════════════════════════════════════════════════════ */
+.sm-col {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+/* Group = 2 (or 1) seats stacked */
+.sm-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sg);
+}
+
+/* ── Dividers between groups ─────────────────────────────────────────────── */
+
+/* Dashed — between UB/MB, MB/LB, UB/LB */
+.sm-gdiv {
+  height: var(--gdiv);
+  margin: 0;
+  background: repeating-linear-gradient(
+    90deg, #DADADA 0, #DADADA 3px, transparent 3px, transparent 7px
+  );
+  border-top: 1px solid #E4E4E4;
+  border-bottom: 1px solid #E4E4E4;
+  flex-shrink: 0;
+}
+
+/* Solid — before side berths */
+.sm-sdiv {
+  height: var(--sdiv);
+  margin: 0;
+  background: #F0F0F0;
+  border-top: 2px solid #CFCFCF;
+  border-bottom: 2px solid #CFCFCF;
+  flex-shrink: 0;
+}
+
+/* Aisle — CC/EC between top 2 and bottom 3 */
+.sm-adiv {
+  height: var(--adiv);
+  margin: 0;
+  background: repeating-linear-gradient(
+    90deg, #DADADA 0, #DADADA 3px, transparent 3px, transparent 7px
+  );
+  border-top: 1px solid #E4E4E4;
+  border-bottom: 1px solid #E4E4E4;
+  flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   SEAT BUTTON
+   ════════════════════════════════════════════════════════════════════════════ */
+.sm-seat {
+  width: var(--sw);
+  height: var(--sh);
+  border-radius: 9px;
+  border: 1.5px solid #CFD8DC;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  overflow: hidden;
+  padding: 0;
+  font-family: inherit;
+  flex-shrink: 0;
+  transition: transform 0.11s, box-shadow 0.11s, border-color 0.11s;
+  position: relative;
+}
+.sm-seat:hover:not(:disabled) {
+  transform: scale(1.07);
+  box-shadow: 0 4px 14px rgba(0,200,83,0.22);
+  border-color: #00C853;
+  z-index: 4;
+}
+.sm-seat:disabled { cursor: not-allowed; }
+
+/* Rotated label strip on LEFT edge */
+.sm-lbl {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  padding: 2px 2px;
+  background: rgba(0,0,0,0.055);
+  color: rgba(0,0,0,0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: pre;        /* preserve \n for SIDE\nLWR */
+  line-height: 1.1;
+  flex-shrink: 0;
+}
+
+/* Seat number — right side */
+.sm-num {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 900;
+  color: #37474F;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+/* ── Status variants ─────────────────────────────────────────────────────── */
+
+/* AVAILABLE */
+.sm-available {
+  border-color: #CFD8DC;
+  background: #fff;
+}
+.sm-available:hover:not(:disabled) .sm-num { color: #00C853; }
+.sm-available:hover:not(:disabled) .sm-lbl { background: rgba(0,200,83,0.14); color: #00A040; }
+
+/* BOOKED — MALE */
+.sm-booked-male {
+  border-color: #43A047;
+  background: #E8F5E9;
+}
+.sm-booked-male .sm-lbl { background: #43A047; color: #fff; }
+.sm-booked-male .sm-num { color: #1B5E20; font-size: 16px; }
+
+/* BOOKED — FEMALE */
+.sm-booked-female {
+  border-color: #D81B60;
+  background: #FCE4EC;
+}
+.sm-booked-female .sm-lbl { background: #D81B60; color: #fff; }
+.sm-booked-female .sm-num { color: #880E4F; font-size: 16px; }
+
+/* SELECTED */
+.sm-selected {
+  border-color: #1565C0;
+  background: #E8EAF6;
+  animation: sm-pulse 1.6s ease-in-out infinite;
+}
+.sm-selected .sm-lbl { background: #1565C0; color: #fff; }
+.sm-selected .sm-num { color: #1565C0; }
+
+@keyframes sm-pulse {
+  0%,100% { box-shadow: 0 0 0 3px rgba(21,101,192,0.20); }
+  50%      { box-shadow: 0 0 0 6px rgba(21,101,192,0.07); }
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  :root {
+    --sh: 46px;
+    --sw: 56px;
+    --lw: 62px;
+  }
+  .sm-num  { font-size: 15px; }
+  .sm-lbl  { font-size: 6px; min-width: 12px; }
+  .sm-lc   { font-size: 7.5px; }
+}
+
+/* end of SeatMap styles */

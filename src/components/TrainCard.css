@@ -1,0 +1,255 @@
+.train-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border: 1px solid #f0f0f0;
+  transition: all 0.2s;
+}
+
+.train-card:hover {
+  box-shadow: 0 6px 24px rgba(0,200,83,0.15);
+  border-color: #b2dfdb;
+  transform: translateY(-2px);
+}
+
+.train-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.train-name-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.train-number {
+  font-size: 13px;
+  color: #1565C0;
+  font-weight: 700;
+  background: #E3F2FD;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.train-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.train-type-badge {
+  font-size: 11px;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.train-days {
+  display: flex;
+  gap: 4px;
+}
+
+.day-pill {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.day-active {
+  background: #E8F5E9;
+  color: #2E7D32;
+  border: 1px solid #A5D6A7;
+}
+
+.day-inactive {
+  background: #F5F5F5;
+  color: #BDBDBD;
+}
+
+.train-rating {
+  font-size: 14px;
+  font-weight: 700;
+  color: #F57F17;
+  background: #FFF8E1;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.star { color: #FFC107; }
+
+.train-timing {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid #F5F5F5;
+  border-bottom: 1px solid #F5F5F5;
+  margin-bottom: 16px;
+}
+
+.timing-block {
+  min-width: 90px;
+}
+
+.timing-right { text-align: right; }
+
+.timing-time {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: -0.5px;
+}
+
+.timing-station {
+  font-size: 14px;
+  font-weight: 700;
+  color: #00C853;
+}
+
+.timing-station-name {
+  font-size: 12px;
+  color: #9E9E9E;
+}
+
+.timing-middle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.timing-duration {
+  font-size: 13px;
+  color: #757575;
+  font-weight: 600;
+}
+
+.timing-arrow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+}
+
+.arrow-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, #e0e0e0, #00C853, #e0e0e0);
+  border-radius: 2px;
+}
+
+.timing-amenities {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.amenity-tag {
+  font-size: 10px;
+  background: #F1F8E9;
+  color: #558B2F;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid #DCEDC8;
+}
+
+.train-classes {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.class-chip {
+  flex: 1;
+  min-width: 100px;
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border: 2px solid transparent;
+}
+
+.class-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.avail-green {
+  background: #E8F5E9;
+  border-color: #A5D6A7;
+}
+
+.avail-orange {
+  background: #FFF3E0;
+  border-color: #FFCC80;
+}
+
+.avail-red {
+  background: #FFEBEE;
+  border-color: #FFCDD2;
+}
+
+.class-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+.class-fare {
+  font-size: 16px;
+  font-weight: 700;
+  color: #00C853;
+}
+
+.class-avail {
+  font-size: 11px;
+  color: #757575;
+  font-weight: 600;
+}
+
+.view-seats-btn {
+  margin-top: 6px;
+  background: #00C853;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.view-seats-btn:hover {
+  background: #00A846;
+}
+
+@media (max-width: 600px) {
+  .train-card { padding: 14px 16px; }
+  .timing-time { font-size: 18px; }
+  .train-name { font-size: 14px; }
+  .class-chip { min-width: 70px; }
+}
